@@ -3,17 +3,16 @@ import 'package:platio/Model/menuItem.dart';
 import 'package:platio/View/Widget/counter.dart';
 import 'package:platio/main.dart';
 
-class cartItem_Widget extends StatefulWidget {
-  const cartItem_Widget({super.key, required this.item});
+class cartItem_Widget extends StatelessWidget {
+  const cartItem_Widget({
+    super.key,
+    required this.item,
+    required this.quantity,
+  });
 
   final menuItem_Model item;
+  final int quantity;
 
-  @override
-  State<cartItem_Widget> createState() => _cartItem_WidgetState();
-}
-
-class _cartItem_WidgetState extends State<cartItem_Widget> {
-  int counter = 1;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -29,11 +28,11 @@ class _cartItem_WidgetState extends State<cartItem_Widget> {
                 children: [
                   //title
                   Text(
-                    widget.item.title,
+                    item.title,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   Text(
-                    "\$ ${widget.item.price.toStringAsFixed(2)} / piece",
+                    "\$ ${item.price.toStringAsFixed(2)} / piece",
                     style: TextStyle(fontWeight: FontWeight.w300),
                   ),
                   SizedBox(height: 20),
@@ -44,7 +43,7 @@ class _cartItem_WidgetState extends State<cartItem_Widget> {
                       color: Colors.green.shade300,
                     ),
                     child: Text(
-                      "\$ ${(widget.item.price * counter).toStringAsFixed(2)}",
+                      "\$ ${(item.price * quantity).toStringAsFixed(2)}",
                       style: TextStyle(fontSize: 15),
                     ),
                   ),
@@ -58,10 +57,10 @@ class _cartItem_WidgetState extends State<cartItem_Widget> {
               height: MediaQuery.of(context).size.width / 4,
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.circular(20),
-                child: Image.network(widget.item.imageUrl, fit: BoxFit.cover),
+                child: Image.network(item.imageUrl, fit: BoxFit.cover),
               ),
             ),
-            counter_Widget(type: Listtype.cart),
+            counter_Widget(item: item, type: Listtype.cart),
           ],
         ),
       ),

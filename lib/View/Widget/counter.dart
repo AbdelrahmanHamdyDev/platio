@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:platio/Controller/stateManagement.dart';
+import 'package:platio/Model/menuItem.dart';
 import 'package:platio/main.dart';
 
-class counter_Widget extends StatefulWidget {
-  const counter_Widget({super.key, required this.type});
+class counter_Widget extends ConsumerWidget {
+  const counter_Widget({super.key, required this.type, required this.item});
 
   final Listtype type;
+  final menuItem_Model item;
 
   @override
-  State<counter_Widget> createState() => _counter_WidgetState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final itemQuantity = ref.watch(cartProvider)[item] ?? 0;
 
-class _counter_WidgetState extends State<counter_Widget> {
-  int counter = 0;
-
-  @override
-  Widget build(BuildContext context) {
     List<Widget> core = [
       //plus
       IconButton(
         onPressed: () {
-          setState(() {
-            counter++;
-          });
+          ref.read(cartProvider.notifier).increaseQuantity(item);
         },
         icon: Icon(Icons.add),
       ),
@@ -35,19 +32,17 @@ class _counter_WidgetState extends State<counter_Widget> {
           shape: BoxShape.circle,
           border: Border.all(color: Colors.black, width: 2),
         ),
-        child: Text(counter.toString()),
+        child: Text(itemQuantity.toString()),
       ),
       //minus
       IconButton(
         onPressed: () {
-          setState(() {
-            counter--;
-          });
+          ref.read(cartProvider.notifier).decreaseQuantity(item);
         },
         icon: Icon(Icons.remove),
       ),
     ];
-    return (widget.type == Listtype.cart)
+    return (type == Listtype.cart)
         ? Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: core,

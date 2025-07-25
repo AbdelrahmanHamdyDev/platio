@@ -39,6 +39,7 @@ dependencies:
   badges: ^3.1.2
   firebase_auth: ^5.7.0
   cloud_firestore: ^5.6.12
+  flutter_riverpod: ^2.6.1
 
 dev_dependencies:
   flutter_test:

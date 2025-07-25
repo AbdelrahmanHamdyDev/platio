@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:platio/Controller/stateManagement.dart';
 import 'package:platio/Model/menuItem.dart';
 import 'package:platio/View/Widget/counter.dart';
 import 'package:platio/main.dart';
 
-class menuItem_Widget extends StatefulWidget {
+class menuItem_Widget extends ConsumerWidget {
   const menuItem_Widget({super.key, required this.item});
 
   final menuItem_Model item;
-
   @override
-  State<menuItem_Widget> createState() => _menuItem_WidgetState();
-}
-
-class _menuItem_WidgetState extends State<menuItem_Widget> {
-  int counter = 0;
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final itemQuantity = ref.watch(cartProvider)[item] ?? 0;
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -28,19 +24,19 @@ class _menuItem_WidgetState extends State<menuItem_Widget> {
             height: MediaQuery.of(context).size.width / 2.5,
             child: ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(20),
-              child: Image.network(widget.item.imageUrl, fit: BoxFit.cover),
+              child: Image.network(item.imageUrl, fit: BoxFit.cover),
             ),
           ),
           SizedBox(height: 10),
           //title
           Text(
-            widget.item.title,
+            item.title,
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width / 2,
             child: Text(
-              widget.item.description,
+              item.description,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
@@ -60,22 +56,21 @@ class _menuItem_WidgetState extends State<menuItem_Widget> {
                   color: Colors.green.shade300,
                 ),
                 child: Text(
-                  "\$ ${widget.item.price.toStringAsFixed(2)}",
+                  "\$ ${item.price.toStringAsFixed(2)}",
                   style: TextStyle(fontSize: 15),
                 ),
               ),
               Container(width: 2, height: 50, color: Colors.black),
               //cart
-              if (counter == 0)
+              if (itemQuantity == 0)
                 IconButton(
                   onPressed: () {
-                    setState(() {
-                      counter++;
-                    });
+                    ref.read(cartProvider.notifier).toggleItem(item);
                   },
                   icon: Icon(Icons.shopping_bag_outlined),
                 ),
-              if (counter != 0) counter_Widget(type: Listtype.menu),
+              if (itemQuantity != 0)
+                counter_Widget(item: item, type: Listtype.menu),
             ],
           ),
           Divider(height: 1, color: Colors.black, thickness: 2),

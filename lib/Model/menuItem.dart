@@ -17,8 +17,6 @@ class menuItem_Model {
 
   factory menuItem_Model.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    print("id: ${doc.id}");
-    print("title: ${data['title']}");
     return menuItem_Model(
       id: doc.id,
       title: data['title'] ?? '',
@@ -27,4 +25,14 @@ class menuItem_Model {
       price: (data['price'] ?? 0).toDouble(),
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is menuItem_Model && other.id == id;
+  }
+
+  // Override hashCode
+  @override
+  int get hashCode => id.hashCode;
 }
