@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:platio/Model/menuItem.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:platio/View/Widget/counter.dart';
 import 'package:platio/main.dart';
 
@@ -26,9 +25,10 @@ class _menuItem_WidgetState extends State<menuItem_Widget> {
           //image
           SizedBox(
             width: double.infinity,
+            height: MediaQuery.of(context).size.width / 2.5,
             child: ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(20),
-              child: Image.network(widget.item.imageUrl),
+              child: Image.network(widget.item.imageUrl, fit: BoxFit.cover),
             ),
           ),
           SizedBox(height: 10),

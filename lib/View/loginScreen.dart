@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platio/Controller/firebase.dart';
 
 class loginScreen extends StatefulWidget {
   const loginScreen({super.key, this.initialSignIn = true});
@@ -11,6 +12,7 @@ class loginScreen extends StatefulWidget {
 
 class _loginScreenState extends State<loginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final FireAuth fireAuth = FireAuth();
 
   // Controllers
   final _emailController = TextEditingController();
@@ -38,8 +40,19 @@ class _loginScreenState extends State<loginScreen> {
       final password = _passwordController.text.trim();
       final userName = _userNameController.text.trim();
 
-      // TODO: Add Firebase Auth logic
       String? errorMessage;
+      if (_isSignIn) {
+        errorMessage = await fireAuth.loginWithEmail(
+          email: email,
+          password: password,
+        );
+      } else {
+        errorMessage = await fireAuth.registerWithEmail(
+          email: email,
+          password: password,
+          username: userName,
+        );
+      }
 
       if (errorMessage == null) {
         Navigator.pushReplacementNamed(context, '/menu');

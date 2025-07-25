@@ -1,28 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:platio/Controller/firebase.dart';
 import 'package:platio/Model/menuItem.dart';
 import 'package:platio/View/Widget/customAppBar.dart';
 import 'package:platio/View/Widget/cart_item.dart';
 import 'package:platio/View/Widget/menu_item.dart';
 import 'package:platio/main.dart';
-
-List<menuItem_Model> dummyData = [
-  menuItem_Model(
-    id: "1",
-    description: "Bun,burger meat, lectus, tomato, and special souse",
-    title: "Burger",
-    price: 20.99,
-    imageUrl:
-        "https://media.istockphoto.com/id/520410807/photo/cheeseburger.jpg?s=612x612&w=0&k=20&c=fG_OrCzR5HkJGI8RXBk76NwxxTasMb1qpTVlEM0oyg4=",
-  ),
-  menuItem_Model(
-    id: "2",
-    title: "Stick",
-    description: "Stick meat, bbq sause",
-    price: 80.9999,
-    imageUrl:
-        "https://www.seriouseats.com/thmb/-KA2hwMofR2okTRndfsKtapFG4Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2015__05__Anova-Steak-Guide-Sous-Vide-Photos15-beauty-159b7038c56a4e7685b57f478ca3e4c8.jpg",
-  ),
-];
 
 class listScreen extends StatelessWidget {
   const listScreen({super.key, required this.type});
@@ -31,22 +13,67 @@ class listScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<menuItem_Model> dummyMenuItems = [
+      menuItem_Model(
+        id: "item1",
+        title: "Chocolate Lava Cake",
+        description:
+            "Warm chocolate cake with a gooey molten center, served with vanilla ice cream.",
+        imageUrl:
+            "https://www.foodandwine.com/thmb/XdFd-DvTtouryLCjeCqwhfmmK-A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/molten-chocolate-cake-FT-RECIPE0220-0a33d7d0ab0c45588f7bfe742d33a9bc.jpg",
+        price: 5.25,
+      ),
+      menuItem_Model(
+        id: "item2",
+        title: "Classic Cheeseburger",
+        description:
+            "Juicy beef patty with melted cheddar, lettuce, tomato, and special sauce on a toasted bun.",
+        imageUrl:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIhD3VIrl1qK5TCm5A2sKgq5dVyjL2ORWW_Q&s",
+        price: 8.99,
+      ),
+    ];
+    final FireStore fireStore = FireStore();
     return Scaffold(
-      appBar: (type == Listtype.menu) ? customAppBar() : AppBar(),
-      //TODO: get the real data from the fireStore
-      body: ListView.builder(
-        itemCount: dummyData.length,
-        itemBuilder:
-            (context, index) => Padding(
-              padding: EdgeInsetsGeometry.symmetric(
-                horizontal: 20,
-                vertical: 5,
-              ),
-              child:
-                  (type == Listtype.menu)
-                      ? menuItem_Widget(item: dummyData[index])
-                      : cartItem_Widget(item: dummyData[index]),
-            ),
+      body: SafeArea(
+        child: FutureBuilder(
+          future:
+              (type == Listtype.menu)
+                  ? fireStore.getMenuItems()
+                  : Future.value(dummyMenuItems),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            final items = snapshot.data!;
+            return CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  expandedHeight: MediaQuery.of(context).size.height / 10,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background:
+                        (type == Listtype.menu) ? customAppBar() : AppBar(),
+                  ),
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 5,
+                      ),
+                      child:
+                          (type == Listtype.menu)
+                              ? menuItem_Widget(item: items[index])
+                              : cartItem_Widget(item: items[index]),
+                    );
+                  }, childCount: items.length),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

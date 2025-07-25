@@ -1,4 +1,3 @@
-import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:platio/Model/menuItem.dart';
 import 'package:platio/View/Widget/counter.dart';
@@ -55,10 +54,11 @@ class _cartItem_WidgetState extends State<cartItem_Widget> {
 
             //image
             SizedBox(
-              width: MediaQuery.of(context).size.width / 2.5,
+              width: MediaQuery.of(context).size.width / 3,
+              height: MediaQuery.of(context).size.width / 4,
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.circular(20),
-                child: Image.network(widget.item.imageUrl),
+                child: Image.network(widget.item.imageUrl, fit: BoxFit.cover),
               ),
             ),
             counter_Widget(type: Listtype.cart),
