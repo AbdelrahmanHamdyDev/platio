@@ -11,8 +11,8 @@ class customBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 190,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [Colors.transparent, Colors.grey],
           begin: Alignment.topCenter,
@@ -34,7 +34,7 @@ class customBottomBar extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 fractionDigits: 2,
                 value: totalPrice,
                 suffix: " \$",
@@ -47,7 +47,7 @@ class customBottomBar extends StatelessWidget {
               onPressed: () {
                 ScaffoldMessenger.of(context).clearSnackBars();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                     content: Text(
                       "The Order Confirmed\nThank you for using the app",
                     ),
@@ -55,7 +55,7 @@ class customBottomBar extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFF25700),
+                backgroundColor: const Color(0xFFF25700),
                 foregroundColor: Colors.white,
                 textStyle: GoogleFonts.lato(
                   color: Colors.white,
@@ -66,7 +66,7 @@ class customBottomBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text("Confirm"),
+              child: const Text("Confirm"),
             ),
           ),
         ],

@@ -21,7 +21,7 @@ class counter_Widget extends ConsumerWidget {
         onPressed: () {
           ref.read(cartProvider.notifier).increaseQuantity(item);
         },
-        icon: Icon(Icons.add),
+        icon: const Icon(Icons.add),
       ),
       //icon
       Container(
@@ -31,7 +31,7 @@ class counter_Widget extends ConsumerWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.black, width: 2),
+          border: Border.all(width: 2),
         ),
         child: Text(itemQuantity.toString(), style: GoogleFonts.gloock()),
       ),
@@ -40,7 +40,7 @@ class counter_Widget extends ConsumerWidget {
         onPressed: () {
           ref.read(cartProvider.notifier).decreaseQuantity(item);
         },
-        icon: Icon(Icons.remove),
+        icon: const Icon(Icons.remove),
       ),
     ];
     return (type == Listtype.cart)

@@ -55,12 +55,15 @@ class cartItem_Widget extends StatelessWidget {
                     ],
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Color(0XFF64baaa),
+                      color: const Color(0XFF64baaa),
                     ),
                     child: Text(
                       "\$ ${(item.price * quantity).toStringAsFixed(2)}",

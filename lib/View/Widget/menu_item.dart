@@ -55,7 +55,7 @@ class menuItem_Widget extends ConsumerWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           //title
           Text(
             item.title,
@@ -77,17 +77,20 @@ class menuItem_Widget extends ConsumerWidget {
             ),
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             spacing: 10,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               //price
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Color(0XFF64baaa),
+                  color: const Color(0XFF64baaa),
                 ),
                 child: Text(
                   "\$ ${item.price.toStringAsFixed(2)}",
@@ -101,13 +104,13 @@ class menuItem_Widget extends ConsumerWidget {
                   onPressed: () {
                     ref.read(cartProvider.notifier).toggleItem(item);
                   },
-                  icon: Icon(Icons.shopping_bag_outlined),
+                  icon: const Icon(Icons.shopping_bag_outlined),
                 ),
               if (itemQuantity != 0)
                 counter_Widget(item: item, type: Listtype.menu),
             ],
           ),
-          Divider(height: 1, color: Colors.black, thickness: 2),
+          const Divider(height: 1, color: Colors.black, thickness: 2),
         ],
       ),
     );

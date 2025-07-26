@@ -94,7 +94,7 @@ class listScreen extends ConsumerWidget {
                   onPressed: () {
                     ref.read(cartProvider.notifier).clearCart();
                   },
-                  icon: Icon(Icons.clear_all),
+                  icon: const Icon(Icons.clear_all),
                 ),
               ],
             ),
@@ -102,7 +102,7 @@ class listScreen extends ConsumerWidget {
         ),
 
         if (cartEntries.isEmpty)
-          SliverFillRemaining(
+          const SliverFillRemaining(
             hasScrollBody: false,
             child: Center(
               child: Text(
@@ -127,7 +127,7 @@ class listScreen extends ConsumerWidget {
               );
             }, childCount: cartEntries.length),
           ),
-        SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
       ],
     );
   }

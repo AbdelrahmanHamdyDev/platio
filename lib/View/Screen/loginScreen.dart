@@ -117,7 +117,7 @@ class _loginScreenState extends State<loginScreen> {
                     _buildTextField(
                       controller: _userNameController,
                       label: "Username",
-                      prefix: Icon(Icons.person),
+                      prefix: const Icon(Icons.person),
                       validator:
                           (val) =>
                               val == null || val.isEmpty
@@ -132,7 +132,7 @@ class _loginScreenState extends State<loginScreen> {
                     controller: _emailController,
                     label: "Email",
                     keyboardType: TextInputType.emailAddress,
-                    prefix: Icon(Icons.email),
+                    prefix: const Icon(Icons.email),
                     validator:
                         (val) =>
                             val == null || val.isEmpty
@@ -156,7 +156,7 @@ class _loginScreenState extends State<loginScreen> {
                       }
                       return null;
                     },
-                    prefix: Icon(Icons.lock_rounded),
+                    prefix: const Icon(Icons.lock_rounded),
                     suffix: IconButton(
                       icon: Icon(
                         _obscurePassword
@@ -177,7 +177,7 @@ class _loginScreenState extends State<loginScreen> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 48),
-                      backgroundColor: Color(0xFFF25700),
+                      backgroundColor: const Color(0xFFF25700),
                       foregroundColor: Colors.white,
                       textStyle: GoogleFonts.lato(
                         color: Colors.white,

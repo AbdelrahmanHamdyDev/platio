@@ -32,7 +32,6 @@ class startScreen extends StatelessWidget {
           ),
           Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
@@ -51,7 +50,7 @@ class startScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 2,
                   height: 50,
@@ -60,7 +59,7 @@ class startScreen extends StatelessWidget {
                       Navigator.pushReplacementNamed(context, '/login');
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFF25700),
+                      backgroundColor: const Color(0xFFF25700),
                       foregroundColor: Colors.white,
                       textStyle: GoogleFonts.lato(
                         color: Colors.white,
@@ -71,7 +70,7 @@ class startScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text("Get Started"),
+                    child: const Text("Get Started"),
                   ),
                 ),
               ],

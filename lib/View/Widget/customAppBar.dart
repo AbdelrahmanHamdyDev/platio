@@ -31,7 +31,7 @@ class customAppBar extends ConsumerWidget {
               fireAuth.signOut();
               Navigator.pushReplacementNamed(context, '/login');
             },
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width / 2,
@@ -55,24 +55,24 @@ class customAppBar extends ConsumerWidget {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           AnimatedFlipCounter(
             textStyle: GoogleFonts.prata(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
             value: totalPrice,
             suffix: " \$",
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           InkWell(
             onTap: () => Navigator.pushNamed(context, '/cart'),
             child: badges.Badge(
-              badgeStyle: badges.BadgeStyle(
+              badgeStyle: const badges.BadgeStyle(
                 badgeColor: const Color(0xFFF25700),
               ),
-              badgeAnimation: badges.BadgeAnimation.scale(),
+              badgeAnimation: const badges.BadgeAnimation.scale(),
               badgeContent: Text(
                 totalItemsQuantity.toString(),
                 style: GoogleFonts.tenorSans(),

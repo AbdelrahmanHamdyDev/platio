@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "123862664559",
+    "project_id": "platio-64628",
+    "storage_bucket": "platio-64628.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123862664559:android:e129297a00cd41f1a8149a",
+        "android_client_info": {
+          "package_name": "com.example.platio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4UW4cffXCKUqQuCw03jy-mWqJeUuvmWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
