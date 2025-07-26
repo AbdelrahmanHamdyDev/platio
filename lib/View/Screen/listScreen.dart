@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:platio/Service/firebase.dart';
 import 'package:platio/Controller/stateManagement.dart';
 import 'package:platio/Model/menuItem.dart';
 import 'package:platio/View/Widget/customAppBar.dart';
 import 'package:platio/View/Widget/cart_item.dart';
+import 'package:platio/View/Widget/customBottomBar.dart';
 import 'package:platio/View/Widget/menu_item.dart';
 import 'package:platio/main.dart';
 
@@ -25,45 +27,7 @@ class listScreen extends ConsumerWidget {
     return Scaffold(
       bottomNavigationBar:
           (type == Listtype.cart && cart.entries.isNotEmpty)
-              ? Container(
-                height: 170,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.transparent, Colors.grey],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-                child: Column(
-                  spacing: 20,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Total Price: "),
-                        Text("\$ ${totalPrice.toStringAsFixed(2)}"),
-                      ],
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).clearSnackBars();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                "The Order Confirmed \n Thank you for using the app",
-                              ),
-                            ),
-                          );
-                        },
-                        child: Text("Confirm"),
-                      ),
-                    ),
-                  ],
-                ),
-              )
+              ? customBottomBar(totalPrice: totalPrice)
               : null,
       body: SafeArea(
         child:
@@ -79,9 +43,14 @@ class listScreen extends ConsumerWidget {
       future: fireStore.getMenuItems(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: SizedBox(
+              width: 150,
+              height: 150,
+              child: Lottie.asset('assets/Logo_Animation.json'),
+            ),
+          );
         }
-
         final menuItems = snapshot.data!;
 
         return CustomScrollView(

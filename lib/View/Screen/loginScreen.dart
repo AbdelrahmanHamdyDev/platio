@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:platio/Service/firebase.dart';
 
 class loginScreen extends StatefulWidget {
@@ -95,7 +96,7 @@ class _loginScreenState extends State<loginScreen> {
                     child: ClipOval(
                       child: Image.asset(
                         "assets/logo.png",
-                        fit: BoxFit.contain, // keeps full logo visible
+                        fit: BoxFit.contain,
                         width: 120,
                         height: 120,
                       ),
@@ -104,7 +105,10 @@ class _loginScreenState extends State<loginScreen> {
                   const SizedBox(height: 10),
                   Text(
                     title,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                    style: GoogleFonts.cinzel(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
 
                   const SizedBox(height: 40),
@@ -173,8 +177,16 @@ class _loginScreenState extends State<loginScreen> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 48),
-                      backgroundColor:
-                          Theme.of(context).colorScheme.primaryContainer,
+                      backgroundColor: Color(0xFFF25700),
+                      foregroundColor: Colors.white,
+                      textStyle: GoogleFonts.lato(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                     onPressed: _submit,
                     child: Text(Botton_title.toUpperCase()),
@@ -184,10 +196,13 @@ class _loginScreenState extends State<loginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(switchText),
+                      Text(switchText, style: GoogleFonts.playfairDisplay()),
                       TextButton(
                         onPressed: _toggleAuthMode,
-                        child: Text(!_isSignIn ? "Sign In" : "Sign Up"),
+                        child: Text(
+                          !_isSignIn ? "Sign In" : "Sign Up",
+                          style: GoogleFonts.playfairDisplay(),
+                        ),
                       ),
                     ],
                   ),

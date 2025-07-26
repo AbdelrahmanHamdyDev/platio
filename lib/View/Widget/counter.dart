@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:platio/Controller/stateManagement.dart';
 import 'package:platio/Model/menuItem.dart';
 import 'package:platio/main.dart';
@@ -32,7 +33,7 @@ class counter_Widget extends ConsumerWidget {
           shape: BoxShape.circle,
           border: Border.all(color: Colors.black, width: 2),
         ),
-        child: Text(itemQuantity.toString()),
+        child: Text(itemQuantity.toString(), style: GoogleFonts.gloock()),
       ),
       //minus
       IconButton(

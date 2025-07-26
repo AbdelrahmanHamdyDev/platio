@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:platio/Model/menuItem.dart';
 import 'package:platio/View/Widget/counter.dart';
 import 'package:platio/main.dart';
@@ -29,22 +30,41 @@ class cartItem_Widget extends StatelessWidget {
                   //title
                   Text(
                     item.title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: GoogleFonts.cinzel(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
-                  Text(
-                    "\$ ${item.price.toStringAsFixed(2)} / piece",
-                    style: TextStyle(fontWeight: FontWeight.w300),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "\$${item.price.toStringAsFixed(2)} ",
+                        style: GoogleFonts.tenorSans(
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      Text(
+                        "/ piece",
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 14, // smaller
+                          fontWeight: FontWeight.w300,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
                   ),
+
                   SizedBox(height: 20),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.green.shade300,
+                      color: Color(0XFF64baaa),
                     ),
                     child: Text(
                       "\$ ${(item.price * quantity).toStringAsFixed(2)}",
-                      style: TextStyle(fontSize: 15),
+                      style: GoogleFonts.prata(fontSize: 15),
                     ),
                   ),
                 ],

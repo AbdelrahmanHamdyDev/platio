@@ -66,6 +66,8 @@ Platio is built using the **MVC** pattern for scalability and clarity:
 
   # UI & Badges
   badges: ^3.1.2
+  animated_flip_counter: ^0.3.4
+  google_fonts: ^6.2.1
 
   # Firebase Integration
   firebase_auth: ^5.7.0
@@ -131,7 +133,7 @@ lib/
 
 | Welcome Screen                         | Login Screen                         | Menu Screen                         | Cart Screen                               |
 | ------------------------------------- | ------------------------------------ | ---------------------------------------- | ----------------------------------------- |
-| ![Welcome](screenshots/Welcome.png)     | ![Login](screenshots/Login.png)      | ![Menu](screenshots/Menu.png)       | ![Cart](screenshots/Cart.png)             |
+| ![Welcome](screenshots/Welcome2.png)     | ![Login](screenshots/Login2.png)      | ![Menu](screenshots/Menu2.png)       | ![Cart](screenshots/Cart2.png)             |
 
 ---
 

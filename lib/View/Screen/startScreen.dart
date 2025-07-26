@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class startScreen extends StatelessWidget {
   const startScreen({super.key});
@@ -34,34 +35,18 @@ class startScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Stack(
-                  children: [
-                    Text(
-                      "Platio",
-                      style: TextStyle(
-                        fontSize: 70,
-                        fontWeight: FontWeight.bold,
-                        foreground:
-                            Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.black,
-                      ),
-                    ),
-                    Text(
-                      "Platio",
-                      style: TextStyle(
-                        fontSize: 70,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white, // fill color
-                      ),
-                    ),
-                  ],
+                Text(
+                  "Platio",
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 70,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
                 Text(
                   "Where Flavor Meets Simplicity.",
-                  style: TextStyle(
-                    fontSize: 20,
+                  style: GoogleFonts.cinzel(
+                    fontSize: 18,
                     fontWeight: FontWeight.w300,
                     color: Colors.white,
                   ),
@@ -77,7 +62,7 @@ class startScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFFF25700),
                       foregroundColor: Colors.white,
-                      textStyle: TextStyle(
+                      textStyle: GoogleFonts.lato(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w400,

@@ -1,7 +1,9 @@
+import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:platio/Controller/stateManagement.dart';
 
 class customAppBar extends ConsumerWidget {
@@ -38,10 +40,13 @@ class customAppBar extends ConsumerWidget {
               text: TextSpan(
                 style: const TextStyle(fontSize: 20, color: Colors.black),
                 children: [
-                  const TextSpan(text: "Welcome Again "),
+                  TextSpan(
+                    text: "Welcome Again ",
+                    style: GoogleFonts.playfairDisplay(),
+                  ),
                   TextSpan(
                     text: fireAuth.currentUser?.displayName ?? "User",
-                    style: const TextStyle(
+                    style: GoogleFonts.cinzel(
                       fontWeight: FontWeight.bold,
                       fontSize: 22,
                     ),
@@ -51,16 +56,27 @@ class customAppBar extends ConsumerWidget {
             ),
           ),
           Spacer(),
-          Text(
-            "${totalPrice.round()} \$",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          AnimatedFlipCounter(
+            textStyle: GoogleFonts.prata(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            duration: Duration(milliseconds: 500),
+            value: totalPrice,
+            suffix: " \$",
           ),
           SizedBox(width: 10),
           InkWell(
             onTap: () => Navigator.pushNamed(context, '/cart'),
             child: badges.Badge(
+              badgeStyle: badges.BadgeStyle(
+                badgeColor: const Color(0xFFF25700),
+              ),
               badgeAnimation: badges.BadgeAnimation.scale(),
-              badgeContent: Text(totalItemsQuantity.toString()),
+              badgeContent: Text(
+                totalItemsQuantity.toString(),
+                style: GoogleFonts.tenorSans(),
+              ),
               child: const Icon(Icons.shopping_cart_outlined),
             ),
           ),

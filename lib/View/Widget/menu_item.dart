@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:platio/Controller/stateManagement.dart';
 import 'package:platio/Model/menuItem.dart';
 import 'package:platio/View/Widget/counter.dart';
@@ -24,14 +25,44 @@ class menuItem_Widget extends ConsumerWidget {
             height: MediaQuery.of(context).size.width / 2.5,
             child: ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(20),
-              child: Image.network(item.imageUrl, fit: BoxFit.cover),
+              child: Image.network(
+                item.imageUrl,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value:
+                          loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  (loadingProgress.expectedTotalBytes ?? 1)
+                              : null,
+                    ),
+                  );
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey.shade200,
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.broken_image,
+                      size: 40,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           SizedBox(height: 10),
           //title
           Text(
             item.title,
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            style: GoogleFonts.cinzel(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width / 2,
@@ -39,7 +70,10 @@ class menuItem_Widget extends ConsumerWidget {
               item.description,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+              style: GoogleFonts.playfairDisplay(
+                fontSize: 15,
+                fontWeight: FontWeight.w300,
+              ),
             ),
           ),
 
@@ -50,14 +84,14 @@ class menuItem_Widget extends ConsumerWidget {
             children: [
               //price
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.green.shade300,
+                  color: Color(0XFF64baaa),
                 ),
                 child: Text(
                   "\$ ${item.price.toStringAsFixed(2)}",
-                  style: TextStyle(fontSize: 15),
+                  style: GoogleFonts.prata(fontSize: 15),
                 ),
               ),
               Container(width: 2, height: 50, color: Colors.black),
