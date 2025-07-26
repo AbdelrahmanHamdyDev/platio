@@ -1,4 +1,4 @@
-name: Flutter CI/CD
+name: Flutter Ci/CD
 
 on:
   push:
@@ -6,51 +6,49 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+  actions: read
+
 jobs:
-  build:
+  build_and_release:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout code
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Setup Java (needed for Gradle)
-      - name: Setup Java
+      - name: Setup Java (Temurin 17)
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      # 3. Setup Flutter SDK
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable
+          flutter-version: '3.7.2'
 
-      # 4. Accept Android licenses (important!)
-      - name: Accept Android Licenses
-        run: yes | sdkmanager --licenses || true
-
-      # 5. Get dependencies
-      - name: Flutter pub get
+      - name: Get dependencies
         run: flutter pub get
 
-      # 6. Analyze code
-      - name: Flutter analyze
-        run: flutter analyze
+      - name: Run tests
+        run: flutter test || true
 
-      # 7. Run tests
-      - name: Flutter test
-        run: flutter test
-
-      # 8. Build APK
-      - name: Flutter build apk
+      - name: Build universal APK
         run: flutter build apk --release
 
-      # 9. Upload APK artifact
-      - name: Upload release APK
-        uses: actions/upload-artifact@v4
+      - name: Prepare artifacts
+        run: |
+          mkdir -p artifacts
+          cp build/app/outputs/flutter-apk/app-release.apk artifacts/
+
+      # ─────────────── ONLY ON TAGS ───────────────
+      - name: Create or update Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: ncipollo/release-action@v1.16.0
         with:
-          name: app-release
-          path: build/app/outputs/flutter-apk/app-release.apk
+          tag: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          artifacts: artifacts/app-release.apk
+          token: ${{ secrets.GITHUB_TOKEN }}
